@@ -4,8 +4,12 @@ version := "1.0"
 
 scalaVersion := "2.11.6"
 
-val akkaVersion = "2.3.6"
-val sprayVersion = "1.3.1"
+val akkaVersion = "2.3.11"
+val sprayVersion = "1.3.3"
+
+unmanagedBase := baseDirectory.value / "lib"
+
+mainClass in (Compile, run) := Some("master.NetworkManager")
 
 /* dependencies */
 libraryDependencies ++= Seq (
@@ -18,6 +22,7 @@ libraryDependencies ++= Seq (
   // -- Akka --
   ,"com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test"
   ,"com.typesafe.akka" %% "akka-actor" % akkaVersion
+  ,"com.typesafe.akka" %% "akka-remote" % akkaVersion
   ,"com.typesafe.akka" %% "akka-slf4j" % akkaVersion
   // -- Spray --
   ,"io.spray" %% "spray-routing" % sprayVersion
