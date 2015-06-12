@@ -21,13 +21,13 @@ object NetworkManager extends App {
 class NetworkManagerActor extends Actor {
 
   // create the remote actor
-  val remote = context.actorSelection("akka://HelloRemoteSystem@192.168.2.23:2552/user/RemoteManagerActor")
+  val selection = context.actorSelection("akka.tcp://HelloRemoteSystem@127.0.0.1:2552/user/RemoteManagerActor")
   var counter = 0
 
   def receive = {
     case Start(loc) =>
-      println(s"""$loc""")
-      remote ! Message("Hello from the LocalActor")
+      println(s"""Starting: $loc""")
+      selection ! Message("Hello from the LocalActor")
     case Message(msg) =>
       println(s"LocalActor received message: '$msg'")
       if (counter < 5) {
